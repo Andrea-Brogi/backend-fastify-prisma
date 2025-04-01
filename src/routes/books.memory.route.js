@@ -19,8 +19,8 @@ async function booksMemoryRoute(fastify, options) {
 
   fastify.get('/:id', { schema: getBookSchema }, async (request, reply) => {
     //  ⚙️🔥 write your code here ⚙️🔥
-    const { id } = request.params;
-    const book = books.find((num)=>{return(num.id==id);});
+    const { id } = request.params; // request.params.properties.id;
+    const book = books.find((book_)=>{return(book_.id==id);});
     return book; 
   });
 

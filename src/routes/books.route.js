@@ -16,8 +16,9 @@ async function booksRoute(fastify, options) {
 
   fastify.get('/:id', { schema: getBookSchema }, async (request, reply) => {
     //  ⚙️🔥 write your code here ⚙️🔥
-    // tips : look about findUnique
+   
     reply.code(404).send({ error: 'Not implemented' });
+    // tips : look about findUnique
   });
 
   const createBookSchema = {
@@ -33,6 +34,7 @@ async function booksRoute(fastify, options) {
 
   fastify.post('/', { schema: createBookSchema }, async (request, reply) => {
     //  ⚙️🔥 write your code here ⚙️🔥
+
     reply.code(404).send({ error: 'Not implemented' });
   });
 

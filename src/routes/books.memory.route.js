@@ -5,7 +5,7 @@ async function booksMemoryRoute(fastify, options) {
 
   fastify.get('/', async (request, reply) => {
     //  ⚙️🔥 write your code here ⚙️🔥
-    reply.code(404).send({ error: 'Not implemented' });
+    return books;
   });
 
   const getBookSchema = {
@@ -19,7 +19,9 @@ async function booksMemoryRoute(fastify, options) {
 
   fastify.get('/:id', { schema: getBookSchema }, async (request, reply) => {
     //  ⚙️🔥 write your code here ⚙️🔥
-    reply.code(404).send({ error: 'Not implemented' });
+    const { id } = request.params;
+    const book = books.find((num)=>{return(num.id==id);});
+    return book; 
   });
 
   const createBookSchema = {
@@ -35,7 +37,12 @@ async function booksMemoryRoute(fastify, options) {
 
   fastify.post('/', { schema: createBookSchema }, async (request, reply) => {
     //  ⚙️🔥 write your code here ⚙️🔥
-    reply.code(404).send({ error: 'Not implemented' });
+    const { title, author } = request.body;
+    const new_book = {title : title, author : author, id: books.length};
+    books.push(new_book);
+    reply.code(201).send(new_book);
+
+
   });
 
   const updateBookSchema = {
@@ -57,7 +64,12 @@ async function booksMemoryRoute(fastify, options) {
 
   fastify.put('/:id', { schema: updateBookSchema }, async (request, reply) => {
     //  ⚙️🔥 write your code here ⚙️🔥
-    reply.code(404).send({ error: 'Not implemented' });
+    const { id } = request.params;
+    const {title, author} = request.body;
+    const book = books[id];
+    book.title = title;
+    book.author = author;
+    reply.code(201).send(book);
   });
 
   const deleteBookSchema = {
@@ -69,8 +81,9 @@ async function booksMemoryRoute(fastify, options) {
     },
   };
   fastify.delete('/:id', { schema: deleteBookSchema }, async (request, reply) => {
-    //  ⚙️🔥 write your code here ⚙️🔥
-    reply.code(404).send({ error: 'Not implemented' });
+    const { id } = request.params;
+    const deleted_book = books.splice(id,1);
+    reply.code(201).send(deleted_book);
   });
 }
 

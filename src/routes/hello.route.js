@@ -4,7 +4,7 @@ export default async (app, opts) => {
   app.get("/", async (request, reply) => {
     return { hello: "world" };
   });
-  // Parametrized route with validation
+  // Parametrized route with validation -- JS object
   const opt = {
     schema: {
       params: {

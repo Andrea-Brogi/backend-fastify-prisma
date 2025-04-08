@@ -46,6 +46,7 @@ async function booksRoute(fastify, options) {
       });
       reply.code(201).send(book);
     });
+
   
     const updateBookSchema = {
       params: {

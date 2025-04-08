@@ -5,6 +5,8 @@ import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
 import fastifyStatic from '@fastify/static';
 import path from 'path';
+import cookie from '@fastify/cookie';
+import session from '@fastify/session';
 
 const swaggerOptions = {
   swagger: {
@@ -29,6 +31,7 @@ const swaggerUiOptions = {
 import helloRoute from "./routes/hello.route.js";
 import booksMemoryRoute from "./routes/books.memory.route.js";
 import booksRoute from "./routes/books.route.js";
+import loginRoute from "./routes/login.route.js";
 import prismaPlugin from "./plugins/prisma.js";
 
 const registerApp = async (app, opt) => {
@@ -39,11 +42,18 @@ const registerApp = async (app, opt) => {
   app.register(helloRoute);
   app.register(booksMemoryRoute, { prefix: "/booksmemory" });
   app.register(booksRoute, { prefix: "/books" });
+  app.register(loginRoute, {prefix: "/auth"})
 
   app.register(fastifyStatic, {
     root: path.join(process.cwd(), 'public'),
     prefix: '/',
   });
+
+  app.register(cookie);
+  app.register(session, {
+    secret: 'un_secret_pour_la_session_gigaaaaaaaaaaaa_secret_defoufurieuxdeoufdeouf',
+    cookie: { secure: false },
+});
 };
 
 export default registerApp;

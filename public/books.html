@@ -1,0 +1,17 @@
+<head>
+</head>
+<body>
+    <div id="books">prout</div>
+    <script>
+        let books = document.getElementById("books");
+        fetch("/books",{method:"GET"})
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(book => {
+                    const div = document.createElement("div");
+                    div.textContent = book.title || "Titre inconnu";
+                    books.appendChild(div);
+                } )
+            } )
+    </script>
+</body>

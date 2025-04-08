@@ -19,3 +19,18 @@ model Book {
   author    String
   createdAt DateTime @default(now())
 }
+
+model user {
+  id          Int @id@default(autoincrement())
+  username    String 
+  password    String
+  createdAt DateTime @default(now())
+}
+
+model Comment{
+  id          Int @id@default(autoincrement())
+  content     String
+  bookId      String
+  userId      String
+  createdAt   String
+}

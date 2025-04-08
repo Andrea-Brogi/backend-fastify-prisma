@@ -3,6 +3,8 @@
 import Fastify from "fastify";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
+import fastifyStatic from '@fastify/static';
+import path from 'path';
 
 const swaggerOptions = {
   swagger: {
@@ -37,6 +39,11 @@ const registerApp = async (app, opt) => {
   app.register(helloRoute);
   app.register(booksMemoryRoute, { prefix: "/booksmemory" });
   app.register(booksRoute, { prefix: "/books" });
+
+  app.register(fastifyStatic, {
+    root: path.join(process.cwd(), 'public'),
+    prefix: '/',
+  });
 };
 
 export default registerApp;
